@@ -8,7 +8,7 @@ Creates a tab element structure in #target with implicit routing handlers (remem
 Creates a tab element structure in #target with explicit routing handlers
 
 #### $("#target").tabs(…)
-Element.prototype is agumented with $.tabs.create()
+Element.prototype is augmented with $.tabs.create()
 
 #### License
 abaaso.route is licensed under BSD-3 http://www.opensource.org/licenses/BSD-3-Clause
