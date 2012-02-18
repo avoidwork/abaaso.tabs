@@ -36,7 +36,7 @@
  * @requires abaaso.route
  * @version 1.0
  */
-(function () {
+(function (window) {
 	"use strict";
 
 	var tabs = (function () {
@@ -46,35 +46,38 @@
 		/**
 		 * Add a tab widget to a target Element
 		 * 
-		 * @param  {Object}  target   Element to receive the tabs
-		 * @param  {Object}  children Tabs to add to this widget
-		 * @param  {Object}  args     Properties to set on the tabs
-		 * @param  {Boolean} subs     True if called as for nested subs
+		 * @param  {Object} target   Element to receive the tabs
+		 * @param  {Object} children Tabs to add to this widget
+		 * @param  {Object} args     Properties to set on the tabs
+		 * @param  {String} route    URI route to prepend
 		 * @return {Object} Element
 		 */
 		create = function (target, children, args, route) {
-			var obj, hash, i, item, array;
+			var obj, hash, x, item, array, section, fn;
 
 			args instanceof Object ? args["class"] = "tabs" : args = {"class": "tabs"};
-			route = typeof route === "undefined" ? "" : route;
-			array = (children instanceof Array);
+			route   = typeof route === "undefined" ? "" : route;
+			array   = (children instanceof Array);
+			obj     = target.create("ul", args);
+			section = target.create("section", {"class": "content"});
 
-			if (target !== null) obj = target.create("ul", args);
-
-			for (i in children) {
-				if (!children.hasOwnProperty(i)) continue;
-				item = array ? children[parseInt(i)] : i;
-				hash = route + "/" + item.toLowerCase();
-				if (!array && typeof children[item] === "function") $.route.set(hash.replace(/^\/{1,1}/, ""), children[item]);
-				typeof i !== "object" ? obj.create("li").create("a", {href: "#!" + hash}).html(item) : tabs(obj, children[array ? parseInt(i) : i], null, hash);
+			for (x in children) {
+				(function () {
+					var i = x;
+					if (!children.hasOwnProperty(i)) return;
+					item = array ? children[parseInt(i)] : i;
+					hash = route + "/" + item.toLowerCase();
+					fn   = !array && typeof children[item] === "function" ? children[item] : function () { section.get(hash); }
+					$.route.set(hash.replace(/^\/{1,1}/, ""), fn);
+					typeof i !== "object" ? obj.create("li").create("a", {href: "#!" + hash}).html(item) : tabs(obj, children[array ? parseInt(i) : i], null, hash);
+				})();
 			}
 
-			target.create("section", {"class": "content"});
 			return target;
 		};
 
 		// Hooking into prototype chain
-		Element.prototype.tabs = create;
+		Element.prototype.tabs = function (children, args, route) { return create(this, children, args, route); };
 
 		// @constructor
 		return {
@@ -85,4 +88,4 @@
 
 	// AMD support
 	typeof define === "function" ? define("abaaso.tabs", ["abaaso", "abaaso.route"], fn) : abaaso.on("init", fn, "abaaso.tabs");
-})();
+})(window);
