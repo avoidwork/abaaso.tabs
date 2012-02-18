@@ -1,5 +1,5 @@
 # abaaso.tabs
-abaaso.tabs makes creating UI tabs with hash routing extremely easy!
+abaaso.tabs module makes creating UI tabs with hash routing extremely easy!
 
 #### tabs.create($("#target"), ["Tab 1", "Tab 2"])
 Creates a tab element structure in #target with implicit routing handlers (remember to set the before allowing the User to interact with the tabs!).
