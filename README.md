@@ -1,5 +1,5 @@
 # abaaso.tabs
-abaaso.tabs module makes creating UI tabs with hash routing extremely easy!
+abaaso.tabs is an HTML5 module that makes creating UI tabs with hash routing extremely easy!
 
 If you do not provide routing listeners when creating tabs, stubs will be set in their place. This is done so application states are not impacted.
 
