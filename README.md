@@ -23,7 +23,7 @@ Identifies "active" tab routing.
 #### .content
 Identifies Section Elements which hold tab content.
 
-##### .hidden
+#### .hidden
 Hides inactive tab Elements; this should set "display:none;".
 
 #### .tab
