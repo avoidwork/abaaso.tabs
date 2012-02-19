@@ -35,7 +35,6 @@
  * @requires abaaso 1.8
  * @requires abaaso.route
  * @version 1.0
- * @todo  correct redraw of children when they're nested and revisited
  */
 (function (window) {
 	"use strict";
@@ -55,10 +54,16 @@
 			    tabs = [];
 
 			$(".tabs a.active").removeClass("active");
+			$("section.content").addClass("hidden");
+			$("ul.tabs").addClass("hidden");
+			$("ul.root").removeClass("hidden");
+			$("section.root").removeClass("hidden");
 
 			if (hash.first() === "#!") hash.shift();
 			hash.each(function (i) {
 				tabs.concat($(".tabs a[data-hash=\"" + i + "\"]").addClass("active"));
+				$("ul.tabs[data-hash=\"" + i + "\"]").removeClass("hidden");
+				$("section[data-hash=\"" + i + "\"]").removeClass("hidden");
 			});
 
 			return tabs;
@@ -73,8 +78,8 @@
 		 * @param  {String} route    URI route to prepend
 		 * @return {Object} Element
 		 */
-		create = function (target, children, args, route, flrst) {
-			var first = true, obj, hash, x, item, array, section, fn;
+		create = function (target, children, args, route, first) {
+			var first = true, obj, hash, x, item, array, section, fn, dhash;
 
 			args instanceof Object ? args["class"] = "tabs" : args = {"class": "tabs"};
 
@@ -84,16 +89,38 @@
 			section = target.create("section", {"class": "content"});
 			first   = (typeof first === "undefined" || first === true);
 
+			switch (true) {
+				case !route.isEmpty():
+					dhash = route.replace(/^\/{1,1}/, "");
+					obj.update({"data-hash": dhash});
+					section.update({"data-hash": dhash});
+					break;
+				case route.isEmpty():
+					obj.addClass("root");
+					section.addClass("root");
+					break;
+			}
+
 			for (x in children) {
 				(function () {
-					var i = x;
+					var i = x, h;
 					if (!children.hasOwnProperty(i)) return;
 					item = array ? children[parseInt(i)] : i;
 					hash = route + "/" + item.toLowerCase();
-					fn   = !array && typeof children[item] === "function" ? children[item] : function () { section.get(hash); }
-					$.route.set(hash.replace(/^\/{1,1}/, ""), fn);
+					h    = hash.replace(/^\/{1,1}/, "");
+					fn   = !array && typeof children[item] === "function" ? children[item] : function () { void(0); };
+					
+					$.route.set(h, fn);
 					obj.create("li").create("a", {href: "#!" + hash, "data-hash": item.toLowerCase()}).html(item);
-					if (typeof children[i] === "object") first ? section.tabs(children[array ? parseInt(i) : i], null, hash) : create(children[array ? parseInt(i) : i], null, hash, false);
+					switch (true) {
+						case String(children[i]).isEmpty():
+						case typeof children[i] === "function":
+							section.create("section", {"class": "content hidden", "data-hash": h});
+							break;
+						case typeof children[i] === "object":
+							section.tabs(children[array ? parseInt(i) : i], null, hash, first);
+							break;
+					}
 				})();
 			}
 
