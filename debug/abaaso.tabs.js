@@ -34,7 +34,7 @@
  * @link http://avoidwork.com
  * @requires abaaso 1.8
  * @requires abaaso.route
- * @version 1.0
+ * @version 1.1
  */
 (function (window) {
 	"use strict";
@@ -53,17 +53,16 @@
 			var hash = arg.explode("/"),
 			    tabs = [];
 
-			$(".tabs a.active").removeClass("active");
-			$("section.content").addClass("hidden");
-			$("ul.tabs").addClass("hidden");
+			$("ul.tab a.active").removeClass("active");
+			$("section.tab").addClass("hidden");
+			$("ul.tab").addClass("hidden");
 			$("ul.root").removeClass("hidden");
 			$("section.root").removeClass("hidden");
 
 			if (hash.first() === "#!") hash.shift();
 			hash.each(function (i) {
-				tabs.concat($(".tabs a[data-hash=\"" + i + "\"]").addClass("active"));
-				$("ul.tabs[data-hash=\"" + i + "\"]").removeClass("hidden");
-				$("section[data-hash=\"" + i + "\"]").removeClass("hidden");
+				tabs.concat($("ul.tab a[data-hash=\"" + i + "\"]").addClass("active"));
+				$(".tab[data-hash=\"" + i + "\"]").removeClass("hidden");
 			});
 
 			return tabs;
@@ -81,12 +80,12 @@
 		create = function (target, children, args, route, first) {
 			var first = true, obj, hash, x, item, array, section, fn, dhash;
 
-			args instanceof Object ? args["class"] = "tabs" : args = {"class": "tabs"};
+			args instanceof Object ? args["class"] = "tab" : args = {"class": "tab"};
 
 			route   = typeof route === "undefined" ? "" : route;
 			array   = (children instanceof Array);
 			obj     = target.create("ul", args);
-			section = target.create("section", {"class": "content"});
+			section = target.create("section", {"class": "tab"});
 			first   = (typeof first === "undefined" || first === true);
 
 			switch (true) {
@@ -116,7 +115,7 @@
 						case String(children[i]).isEmpty():
 						case typeof children[i] === "function":
 						case children[i] === null:
-							section.create("section", {"class": "content hidden", "data-hash": h});
+							section.create("section", {"class": "tab hidden", "data-hash": h});
 							break;
 						case typeof children[i] === "object":
 							section.tabs(children[array ? parseInt(i) : i], null, hash, first);

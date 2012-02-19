@@ -23,14 +23,11 @@ Element.prototype is augmented with $.tabs.create()
 #### .active
 Identifies "active" tab routing.
 
-#### .content
-Identifies Section Elements which hold tab content.
-
 #### .hidden
 Hides inactive tab Elements; this should set "display:none;".
 
 #### .tab
-Identifies UL Elements that hold tab LI Elements.
+Identifies UL & Section Elements that hold tab related Elements.
 
 ## Information
 #### License
