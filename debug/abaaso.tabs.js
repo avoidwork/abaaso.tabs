@@ -123,7 +123,7 @@
 							for (y in z) {
 								if (!z.hasOwnProperty(y)) continue;
 								if (z instanceof Array) y = z[parseInt(y)].toLowerCase();
-								w.create("div", {"class": "tab hidden", "data-hash": y});
+								w.create("section", {"class": "tab hidden", "data-hash": y});
 							}
 							break;
 					}
