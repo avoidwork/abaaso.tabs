@@ -35,6 +35,7 @@
  * @requires abaaso 1.8
  * @requires abaaso.route
  * @version 1.0
+ * @todo  correct redraw of children when they're nested and revisited
  */
 (function (window) {
 	"use strict";

@@ -35,5 +35,6 @@
  * @requires abaaso 1.8
  * @requires abaaso.route
  * @version 1.0
+ * @todo  correct redraw of children when they're nested and revisited
  */
 (function(a){"use strict";var b=function(){var b=a[abaaso.aliased],c;return c=function(a,d,e,f,g){var h=!0,i,j,k,l,m,n,o;e instanceof Object?e["class"]="tabs":e={"class":"tabs"},f=typeof f=="undefined"?"":f,m=d instanceof Array,i=a.create("ul",e),n=a.create("section",{"class":"content"}),h=typeof h=="undefined"||h===!0;for(k in d)(function(){var a=k;if(!d.hasOwnProperty(a))return;l=m?d[parseInt(a)]:a,j=f+"/"+l.toLowerCase(),o=!m&&typeof d[l]=="function"?d[l]:function(){n.get(j)},b.route.set(j.replace(/^\/{1,1}/,""),o),i.create("li").create("a",{href:"#!"+j}).html(l),typeof d[a]=="object"&&(h?n.tabs(d[m?parseInt(a):a],null,j):c(d[m?parseInt(a):a],null,j,!1))})();return a},Element.prototype.tabs=function(a,b,d){return c(this,a,b,d)},{create:c}},c=function(){abaaso.module("tabs",b())};typeof define=="function"?define("abaaso.tabs",["abaaso","abaaso.route"],c):abaaso.on("init",c,"abaaso.tabs")})(window)
