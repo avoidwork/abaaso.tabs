@@ -15,14 +15,17 @@ Creates a tab element structure in #target with explicit routing handlers
 Element.prototype is augmented with $.tabs.create()
 
 ## CSS Classes
+#### .active
+Identifies "active" tab routing.
+
+#### .content
+Identifies Section Elements which hold tab content.
+
 ##### .hidden
 Hides inactive tab Elements; this should set "display:none;".
 
 #### .tab
 Identifies UL Elements that hold tab LI Elements.
-
-#### .content
-Identifies Section Elements which hold tab content.
 
 ## Information
 #### License
