@@ -42,7 +42,27 @@
 
 	var tabs = (function () {
 		var $ = window[abaaso.aliased],
-		    create;
+		    create, active;
+
+		/**
+		 * Sets "active" class on tabs based on hash parsing
+		 * 
+		 * @param  {String} arg Hash delimited by "/"
+		 * @return {Array} Tabs that received "active"
+		 */
+		active = function (arg) {
+			var hash = arg.explode("/"),
+			    tabs = [];
+
+			$(".tabs a.active").removeClass("active");
+
+			if (hash.first() === "#!") hash.shift();
+			hash.each(function (i) {
+				tabs.concat($(".tabs a[data-hash=\"" + i + "\"]").addClass("active"));
+			});
+
+			return tabs;
+		};
 
 		/**
 		 * Add a tab widget to a target Element
@@ -57,6 +77,7 @@
 			var first = true, obj, hash, x, item, array, section, fn;
 
 			args instanceof Object ? args["class"] = "tabs" : args = {"class": "tabs"};
+
 			route   = typeof route === "undefined" ? "" : route;
 			array   = (children instanceof Array);
 			obj     = target.create("ul", args);
@@ -71,7 +92,7 @@
 					hash = route + "/" + item.toLowerCase();
 					fn   = !array && typeof children[item] === "function" ? children[item] : function () { section.get(hash); }
 					$.route.set(hash.replace(/^\/{1,1}/, ""), fn);
-					obj.create("li").create("a", {href: "#!" + hash}).html(item);
+					obj.create("li").create("a", {href: "#!" + hash, "data-hash": item.toLowerCase()}).html(item);
 					if (typeof children[i] === "object") first ? section.tabs(children[array ? parseInt(i) : i], null, hash) : create(children[array ? parseInt(i) : i], null, hash, false);
 				})();
 			}
@@ -79,11 +100,15 @@
 			return target;
 		};
 
+		// Setting "active" tab class based on hash parsing
+		$.on("hash", function (hash) { active(hash); }, "tabs");
+
 		// Hooking into prototype chain
 		Element.prototype.tabs = function (children, args, route) { return create(this, children, args, route); };
 
 		// @constructor
 		return {
+			active : active,
 			create : create
 		};
 	}),
