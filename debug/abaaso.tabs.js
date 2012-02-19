@@ -131,7 +131,7 @@
 		$.on("hash", function (hash) { active(hash); }, "tabs");
 
 		// Hooking into prototype chain
-		Element.prototype.tabs = function (children, args, route) { return create(this, children, args, route); };
+		Element.prototype.tabs = function (children, args, route, first) { return create(this, children, args, route, first); };
 
 		// @constructor
 		return {
