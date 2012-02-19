@@ -3,7 +3,7 @@ abaaso.tabs is an HTML5 module that makes creating UI tabs with hash routing ext
 
 If you do not provide routing listeners when creating tabs, stubs will be set in their place. This is done so application states are not impacted.
 
-##### How do you identify which pair of UL & Section belong to which tab/route?
+##### How do you identify which pair of UL & Section Elements belong to which tab/route?
 Each pair has a "data-hash" property set to the route endpoint it belongs to.
 
 ## Sample
