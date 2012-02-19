@@ -1,6 +1,8 @@
 # abaaso.tabs
 abaaso.tabs module makes creating UI tabs with hash routing extremely easy!
 
+If you do not provide routing listeners when creating tabs, stubs will be set in their absence. This is done so application states are not impacted.
+
 ## Sample
 $("#stage").tabs({User : ["Details", "Projects", "Files", "Folders", "Links", "Versions", "Subscriptions"], Organization : null});
 
