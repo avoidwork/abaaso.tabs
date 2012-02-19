@@ -52,14 +52,15 @@
 		 * @param  {String} route    URI route to prepend
 		 * @return {Object} Element
 		 */
-		create = function (target, children, args, route) {
-			var obj, hash, x, item, array, section, fn;
+		create = function (target, children, args, route, flrst) {
+			var first = true, obj, hash, x, item, array, section, fn;
 
 			args instanceof Object ? args["class"] = "tabs" : args = {"class": "tabs"};
 			route   = typeof route === "undefined" ? "" : route;
 			array   = (children instanceof Array);
 			obj     = target.create("ul", args);
 			section = target.create("section", {"class": "content"});
+			first   = (typeof first === "undefined" || first === true);
 
 			for (x in children) {
 				(function () {
@@ -69,7 +70,8 @@
 					hash = route + "/" + item.toLowerCase();
 					fn   = !array && typeof children[item] === "function" ? children[item] : function () { section.get(hash); }
 					$.route.set(hash.replace(/^\/{1,1}/, ""), fn);
-					typeof i !== "object" ? obj.create("li").create("a", {href: "#!" + hash}).html(item) : tabs(obj, children[array ? parseInt(i) : i], null, hash);
+					obj.create("li").create("a", {href: "#!" + hash}).html(item);
+					if (typeof children[i] === "object") first ? section.tabs(children[array ? parseInt(i) : i], null, hash) : create(children[array ? parseInt(i) : i], null, hash, false);
 				})();
 			}
 
