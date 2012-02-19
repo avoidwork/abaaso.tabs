@@ -34,7 +34,7 @@
  * @link http://avoidwork.com
  * @requires abaaso 1.8
  * @requires abaaso.route
- * @version 1.1
+ * @version 1.2
  */
 (function (window) {
 	"use strict";
@@ -54,10 +54,8 @@
 			    tabs = [];
 
 			$("ul.tab a.active").removeClass("active");
-			$("section.tab").addClass("hidden");
-			$("ul.tab").addClass("hidden");
-			$("ul.root").removeClass("hidden");
-			$("section.root").removeClass("hidden");
+			$(".tab").addClass("hidden");
+			$(".root").removeClass("hidden");
 
 			if (hash.first() === "#!") hash.shift();
 			hash.each(function (i) {
@@ -102,7 +100,8 @@
 
 			for (x in children) {
 				(function () {
-					var i = x, h;
+					var i = x, h, w, y, z;
+
 					if (!children.hasOwnProperty(i)) return;
 					item = array ? children[parseInt(i)] : i;
 					hash = route + "/" + item.toLowerCase();
@@ -118,7 +117,14 @@
 							section.create("section", {"class": "tab hidden", "data-hash": h});
 							break;
 						case typeof children[i] === "object":
-							section.tabs(children[array ? parseInt(i) : i], null, hash, first);
+							z = children[array ? parseInt(i) : i];
+							section.tabs(z, null, hash, first);
+							w = $("section[data-hash=\"" + h + "\"]");
+							for (y in z) {
+								if (!z.hasOwnProperty(y)) continue;
+								if (z instanceof Array) y = z[parseInt(y)].toLowerCase();
+								w.create("div", {"class": "tab hidden", "data-hash": y});
+							}
 							break;
 					}
 				})();
