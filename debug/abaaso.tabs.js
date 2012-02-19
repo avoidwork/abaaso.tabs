@@ -115,6 +115,7 @@
 					switch (true) {
 						case String(children[i]).isEmpty():
 						case typeof children[i] === "function":
+						case children[i] === null:
 							section.create("section", {"class": "content hidden", "data-hash": h});
 							break;
 						case typeof children[i] === "object":
