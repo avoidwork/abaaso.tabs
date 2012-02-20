@@ -76,7 +76,7 @@
 		 * @return {Object} Element
 		 */
 		create = function (target, children, args, route, first) {
-			var first = true, obj, hash, x, item, array, section, fn, dhash;
+			var obj, hash, x, item, array, section, fn, dhash;
 
 			args instanceof Object ? args["class"] = "tab" : args = {"class": "tab"};
 
