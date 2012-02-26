@@ -32,9 +32,9 @@
  *
  * @author Jason Mulligan <jason.mulligan@avoidwork.com>
  * @link http://avoidwork.com
- * @requires abaaso 1.8
+ * @requires abaaso 1.9
  * @requires abaaso.route
- * @version 1.2
+ * @version 1.3
  */
 (function (window) {
 	"use strict";
@@ -98,37 +98,33 @@
 					break;
 			}
 
-			for (x in children) {
-				(function () {
-					var i = x, h, w, y, z;
+			// Fix the iteration here
+			children.each(function (i, k) {
+				var h, w, y;
 
-					if (!children.hasOwnProperty(i)) return;
-					item = array ? children[parseInt(i)] : i;
-					hash = route + "/" + item.toLowerCase();
-					h    = hash.replace(/^\/{1,1}/, "");
-					fn   = !array && typeof children[item] === "function" ? children[item] : function () { void(0); };
-					
-					$.route.set(h, fn);
-					obj.create("li").create("a", {href: "#!" + hash, "data-hash": item.toLowerCase()}).html(item);
-					switch (true) {
-						case String(children[i]).isEmpty():
-						case typeof children[i] === "function":
-						case children[i] === null:
-							section.create("section", {"class": "tab hidden", "data-hash": h});
-							break;
-						case typeof children[i] === "object":
-							z = children[array ? parseInt(i) : i];
-							section.tabs(z, null, hash, first);
-							w = $("section[data-hash=\"" + h + "\"]");
-							for (y in z) {
-								if (!z.hasOwnProperty(y)) continue;
-								if (z instanceof Array) y = z[parseInt(y)].toLowerCase();
-								w.create("section", {"class": "tab hidden", "data-hash": y});
-							}
-							break;
-					}
-				})();
-			}
+				item = array ? i : k;
+				hash = route + "/" + item.toLowerCase();
+				h    = hash.replace(/^\/{1,1}/, "");
+				fn   = typeof i === "function" ? i : function () { void(0); };
+				
+				$.route.set(h, fn);
+				obj.create("li").create("a", {href: "#!" + hash, "data-hash": item.toLowerCase()}).html(item);
+				switch (true) {
+					case String(i).isEmpty():
+					case typeof i === "function":
+					case i === null:
+						section.create("section", {"class": "tab hidden", "data-hash": h});
+						break;
+					case typeof i === "object":
+						section.tabs(i, null, hash, first);
+						w = $("section[data-hash=\"" + h + "\"]");
+						i.each(function (e, f) {
+							var x = typeof e === "object" ? f : e;
+							w.create("section", {"class": "tab hidden", "data-hash": x.toLowerCase()});
+						});
+						break;
+				}
+			});
 
 			return target;
 		};
