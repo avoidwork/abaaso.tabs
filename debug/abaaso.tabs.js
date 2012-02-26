@@ -117,7 +117,6 @@
 					break;
 			}
 
-			// Fix the iteration here
 			children.each(function (i, k) {
 				var h, w, y;
 
@@ -125,12 +124,11 @@
 				hash = route + "/" + item.toLowerCase();
 				h    = hash.replace(/^\/{1,1}/, "");
 				fn   = typeof i === "function" ? i : function () { void(0); };
-				
+
 				$.route.set(h, fn);
 				obj.create("li").create("a", {href: "#!" + hash, "data-hash": item.toLowerCase()}).html(item);
 				switch (true) {
-					case String(i).isEmpty():
-					case typeof i === "function":
+					case (/function|string/.test(typeof i)):
 					case i === null:
 						section.create("section", {"class": "tab hidden", "data-hash": h});
 						break;
