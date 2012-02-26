@@ -51,16 +51,35 @@
 		 */
 		active = function (arg) {
 			var hash = arg.explode("/"),
-			    tabs = [];
+			    tabs = [],
+			    prev = "",
+			    a, u, s;
 
-			$("ul.tab a.active").removeClass("active");
+			// Hiding tab Elements
+			$(".active").removeClass("active");
 			$(".tab").addClass("hidden");
 			$(".root").removeClass("hidden");
 
 			if (hash.first() === "#!") hash.shift();
+
+			// Setting the route path active & visible
 			hash.each(function (i) {
-				tabs.concat($("ul.tab a[data-hash=\"" + i + "\"]").addClass("active"));
-				$(".tab[data-hash=\"" + i + "\"]").removeClass("hidden");
+				a = "a[data-hash=\"" + i + "\"]";
+				u = "ul.tab[data-hash=\"" + i + "\"]";
+				s = "section.tab[data-hash=\"" + i + "\"]";
+
+				// Prepending parent selector
+				a = (prev !== "" ? "ul.active[data-hash=\"" + prev + "\"] " : ".root ") + a;
+				u = (prev !== "" ? "ul.active[data-hash=\"" + prev + "\"] " : ".root ") + u;
+				s = (prev !== "" ? "section.active[data-hash=\"" + prev + "\"] " : ".root ") + s;
+
+				// Setting classes
+				tabs.concat($(a).addClass("active"));
+				$(u).removeClass("hidden").addClass("active");
+				$(s).removeClass("hidden").addClass("active");
+
+				// Tracking
+				prev = i;
 			});
 
 			return tabs;
