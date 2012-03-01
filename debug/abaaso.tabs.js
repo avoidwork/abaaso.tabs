@@ -32,9 +32,9 @@
  *
  * @author Jason Mulligan <jason.mulligan@avoidwork.com>
  * @link http://avoidwork.com
- * @requires abaaso 1.9
+ * @requires abaaso 1.9.5
  * @requires abaaso.route
- * @version 1.3.1
+ * @version 1.3.2
  */
 (function (window) {
 	"use strict";
@@ -117,7 +117,7 @@
 					break;
 			}
 
-			children.each(function (i, k) {
+			fn = function (i, k) {
 				var h, w, y;
 
 				item = array ? i : k;
@@ -141,8 +141,9 @@
 						});
 						break;
 				}
-			});
+			};
 
+			children instanceof Array ? children.each(fn) : $.iterate(children, fn);
 			return target;
 		};
 
