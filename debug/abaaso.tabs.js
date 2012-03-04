@@ -32,9 +32,9 @@
  *
  * @author Jason Mulligan <jason.mulligan@avoidwork.com>
  * @link http://avoidwork.com
- * @requires abaaso 1.9.5
+ * @requires abaaso 1.9.9
  * @requires abaaso.route
- * @version 1.3.2
+ * @version 1.3.3
  */
 (function (window) {
 	"use strict";
@@ -108,8 +108,8 @@
 			switch (true) {
 				case !route.isEmpty():
 					dhash = route.replace(/^\/{1,1}/, "");
-					obj.update({"data-hash": dhash});
-					section.update({"data-hash": dhash});
+					obj.attr("data-hash", dhash);
+					section.attr("data-hash", dhash);
 					break;
 				case route.isEmpty():
 					obj.addClass("root");
