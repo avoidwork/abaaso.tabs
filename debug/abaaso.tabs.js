@@ -36,12 +36,11 @@
  * @requires abaaso.route
  * @version 1.3.3
  */
-(function (window) {
+(function (global) {
 	"use strict";
 
-	var tabs = (function () {
-		var $ = window[abaaso.aliased],
-		    create, active;
+	var tabs = (function ($) {
+		var create, active;
 
 		/**
 		 * Sets "active" class on tabs based on hash parsing
@@ -159,8 +158,8 @@
 			create : create
 		};
 	}),
-	fn = function () { abaaso.module("tabs", tabs()); };
+	fn = function (abaaso) { abaaso.module("tabs", tabs(global[abaaso.aliased])); };
 
 	// AMD support
-	typeof define === "function" ? define("abaaso.tabs", ["abaaso", "abaaso.route"], fn) : abaaso.on("init", fn, "abaaso.tabs");
-})(window);
+	typeof define === "function" ? define("abaaso.tabs", ["abaaso", "abaaso.route"], fn) : abaaso.on("init", function () { fn(abaaso); }, "abaaso.tabs");
+})(this);
