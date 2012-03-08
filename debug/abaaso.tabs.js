@@ -33,8 +33,8 @@
  * @author Jason Mulligan <jason.mulligan@avoidwork.com>
  * @link http://avoidwork.com
  * @requires abaaso 1.9.9
- * @requires abaaso.route
- * @version 1.3.3
+ * @requires abaaso.route 1.3
+ * @version 1.3.4
  */
 (function (global) {
 	"use strict";
@@ -158,8 +158,8 @@
 			create : create
 		};
 	}),
-	fn = function (abaaso) { abaaso.module("tabs", tabs(global[abaaso.aliased])); };
+	fn = function (abaaso) { return abaaso.module("tabs", tabs(global[abaaso.aliased])).tabs; };
 
 	// AMD support
-	typeof define === "function" ? define("abaaso.tabs", ["abaaso", "abaaso.route"], fn) : abaaso.on("init", function () { fn(abaaso); }, "abaaso.tabs");
+	typeof define === "function" ? define("abaasoTabs", ["abaaso", "abaasoRoute"], fn) : abaaso.on("init", function () { fn(abaaso); }, "abaaso.tabs");
 })(this);
