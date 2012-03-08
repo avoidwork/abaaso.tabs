@@ -161,5 +161,5 @@
 	fn = function (abaaso) { return abaaso.module("tabs", tabs(global[abaaso.aliased])).tabs; };
 
 	// AMD support
-	typeof define === "function" ? define("abaasoTabs", ["abaaso", "abaasoRoute"], function (abaaso) { return fn(abaaso); }) : abaaso.on("init", function () { fn(abaaso); }, "abaaso.tabs");
+	typeof define === "function" ? define("abaaso.tabs", ["abaaso", "abaaso.route"], function (abaaso) { return fn(abaaso); }) : abaaso.on("init", function () { fn(abaaso); }, "abaaso.tabs");
 })(this);
