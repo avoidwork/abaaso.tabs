@@ -34,7 +34,7 @@
  * @link http://avoidwork.com
  * @requires abaaso 1.9.9
  * @requires abaaso.route 1.3
- * @version 1.3.4
+ * @version 1.3.5
  */
 (function (global) {
 	"use strict";
