@@ -134,7 +134,7 @@
 					case typeof i === "object":
 						section.tabs(i, null, hash, first);
 						w = $("section[data-hash=\"" + h + "\"]");
-						i.each(function (e, f) {
+						if (typeof w !== "undefined") i.each(function (e, f) {
 							var x = typeof e === "object" ? f : e;
 							w.create("section", {"class": "tab hidden", "data-hash": x.toLowerCase()});
 						});
