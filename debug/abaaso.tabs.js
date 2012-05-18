@@ -34,7 +34,7 @@
  * @link http://avoidwork.com
  * @requires abaaso 1.9.9
  * @requires abaaso.route 1.3
- * @version 1.3.5
+ * @version 1.3.6
  */
 (function (global) {
 	"use strict";
@@ -151,6 +151,7 @@
 
 		// Hooking into prototype chain
 		Element.prototype.tabs = function (children, args, route, first) { return create(this, children, args, route, first); };
+		if ($.client.ie && $.client.version === 8) HTMLDocument.prototype.tabs = function (children, args, route, first) { return create(this, children, args, route, first); };
 
 		// @constructor
 		return {
@@ -164,5 +165,5 @@
 	};
 
 	// AMD support
-	typeof define === "function" ? define("abaaso.tabs", ["abaaso", "abaaso.route"], function (abaaso) { return fn(abaaso); }) : abaaso.on("init", function () { fn(abaaso); }, "abaaso.tabs");
+	typeof define === "function" ? define("abaaso.tabs", ["abaaso", "abaaso.route"], function (abaaso) { return fn(global[abaaso.aliased]); }) : abaaso.on("init", function () { fn(global[abaaso.aliased]); }, "abaaso.tabs");
 })(this);
