@@ -120,12 +120,12 @@
 				var h, w, y;
 
 				item = array ? i : k;
-				hash = route + "/" + item.toLowerCase();
+				hash = route + "/" + item.hyphenate().toLowerCase();
 				h    = hash.replace(/^\/{1,1}/, "");
 				fn   = typeof i === "function" ? i : function () { void(0); };
 
 				$.route.set(h, fn);
-				obj.create("li").create("a", {href: "#!" + hash, "data-hash": item.toLowerCase()}).html(item);
+				obj.create("li").create("a", {href: "#!" + hash, "data-hash": item.hyphenate().toLowerCase()}).html(item);
 				switch (true) {
 					case (/function|string/.test(typeof i)):
 					case i === null:
