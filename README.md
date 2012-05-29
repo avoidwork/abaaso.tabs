@@ -23,6 +23,9 @@ Element.prototype is augmented with $.tabs.create()
 #### .active
 Identifies "active" tab routing.
 
+#### .disabled
+Disables the route when placed on the anchor which triggers the route.
+
 #### .hidden
 Hides inactive tab Elements; this should set "display:none;".
 
