@@ -32,7 +32,7 @@
  *
  * @author Jason Mulligan <jason.mulligan@avoidwork.com>
  * @link http://avoidwork.com
- * @requires abaaso 2.1.2
+ * @requires abaaso 1.9.9
  * @requires abaaso.route 1.3
  * @version 1.3.8
  */
