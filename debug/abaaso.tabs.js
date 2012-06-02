@@ -34,7 +34,7 @@
  * @link http://avoidwork.com
  * @requires abaaso 1.9.9
  * @requires abaaso.route 1.3
- * @version 1.3.7
+ * @version 1.3.8
  */
 (function (global) {
 	"use strict";
@@ -125,7 +125,7 @@
 				fn   = typeof i === "function" ? i : function () { void(0); };
 
 				$.route.set(h, fn);
-				obj.create("li").create("a", {"data-hash": item.hyphenate().toLowerCase()}).on("click", function (e) { if (!this.hasClass("disabled")) location.hash = "!" + hash; }).html(item);
+				obj.create("li").create("a", {"data-hash": item.hyphenate().toLowerCase(), "data-route": hash}).on("click", function (e) { if (!this.hasClass("disabled")) location.hash = "!" + this.attr("data-route"); }).html(item);
 				switch (true) {
 					case (/function|string/.test(typeof i)):
 					case i === null:
