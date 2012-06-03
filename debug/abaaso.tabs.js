@@ -32,7 +32,7 @@
  *
  * @author Jason Mulligan <jason.mulligan@avoidwork.com>
  * @link http://avoidwork.com
- * @requires abaaso 1.9.9
+ * @requires abaaso 2.1.2
  * @requires abaaso.route 1.3
  * @version 1.3.8
  */
@@ -150,8 +150,8 @@
 		$.on("hash", function (hash) { active(hash); }, "tabs");
 
 		// Hooking into prototype chain
-		Element.prototype.tabs = function (children, args, route, first) { return create(this, children, args, route, first); };
-		if ($.client.ie && $.client.version === 8) HTMLDocument.prototype.tabs = function (children, args, route, first) { return create(this, children, args, route, first); };
+		$.property(Element.prototype, "tabs", {value: function (children, args, route, first) { return create(this, children, args, route, first); }});
+		if ($.client.ie && $.client.version === 8) $.property(HTMLDocument.prototype, "tabs", {value: function (children, args, route, first) { return create(this, children, args, route, first); }});
 
 		// @constructor
 		return {
