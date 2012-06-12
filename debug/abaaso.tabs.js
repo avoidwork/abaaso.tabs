@@ -32,9 +32,9 @@
  *
  * @author Jason Mulligan <jason.mulligan@avoidwork.com>
  * @link http://avoidwork.com
- * @requires abaaso 2.1.2
- * @requires abaaso.route 1.3
- * @version 1.3.8
+ * @requires abaaso 2.1.6
+ * @requires abaaso.route 1.3.2
+ * @version 1.3.9
  */
 (function (global) {
 	"use strict";
@@ -107,8 +107,8 @@
 			switch (true) {
 				case !route.isEmpty():
 					dhash = route.replace(/^\/{1,1}/, "");
-					obj.attr("data-hash", dhash);
-					section.attr("data-hash", dhash);
+					obj.data("hash", dhash);
+					section.data("hash", dhash);
 					break;
 				case route.isEmpty():
 					obj.addClass("root");
@@ -125,7 +125,7 @@
 				fn   = typeof i === "function" ? i : function () { void(0); };
 
 				$.route.set(h, fn);
-				obj.create("li").create("a", {"data-hash": item.hyphenate().toLowerCase(), "data-route": hash}).on("click", function (e) { if (!this.hasClass("disabled")) location.hash = "!" + this.attr("data-route"); }).html(item);
+				obj.create("li").create("a", {"data-hash": item.hyphenate().toLowerCase(), "data-route": hash}).on("click", function (e) { if (!this.hasClass("disabled")) location.hash = "!" + this.data("route"); }).html(item);
 				switch (true) {
 					case (/function|string/.test(typeof i)):
 					case i === null:
