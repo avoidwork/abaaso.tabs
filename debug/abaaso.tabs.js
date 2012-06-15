@@ -165,5 +165,5 @@
 	};
 
 	// AMD support
-	typeof define === "function" ? define("abaaso.tabs", ["abaaso", "abaaso.route"], function (abaaso) { return fn(global[abaaso.aliased]); }) : abaaso.on("init", function () { fn(global[abaaso.aliased]); }, "abaaso.tabs");
+	typeof define === "function" ? define(["abaaso", "abaaso.route"], function (abaaso) { return fn(global[abaaso.aliased]); }) : abaaso.on("init", function () { fn(global[abaaso.aliased]); }, "abaaso.tabs");
 })(this);
