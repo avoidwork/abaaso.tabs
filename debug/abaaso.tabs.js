@@ -32,14 +32,16 @@
  *
  * @author Jason Mulligan <jason.mulligan@avoidwork.com>
  * @link http://avoidwork.com
- * @requires abaaso 2.1.6
- * @requires abaaso.route 1.3.2
- * @version 1.3.9
+ * @requires abaaso 2.2.5
+ * @requires abaaso.route 1.3.4
+ * @version 1.4.0
  */
 (function (global) {
 	"use strict";
 
-	var tabs = (function ($) {
+	var tabs, fn;
+
+	tabs = (function ($) {
 		var create, active;
 
 		/**
@@ -55,7 +57,7 @@
 			    a, u, s;
 
 			// Hiding tab Elements
-			$(".active").removeClass("active");
+			$(".tab .active").removeClass("active");
 			$(".tab").addClass("hidden");
 			$(".root").removeClass("hidden");
 
@@ -94,7 +96,8 @@
 		 * @return {Object} Element
 		 */
 		create = function (target, children, args, route, first) {
-			var obj, hash, x, item, array, section, fn, dhash;
+			var regex = /function|string/,
+			    obj, hash, x, item, array, section, fn, dhash;
 
 			args instanceof Object ? args["class"] = "tab" : args = {"class": "tab"};
 
@@ -117,17 +120,18 @@
 			}
 
 			fn = function (i, k) {
-				var h, w, y;
+				var h, w, y, anchor;
 
 				item = array ? i : k;
 				hash = route + "/" + item.hyphenate().toLowerCase();
-				h    = hash.replace(/^\/{1,1}/, "");
+				h    = hash.replace(/^\//, "");
 				fn   = typeof i === "function" ? i : function () { void(0); };
 
 				$.route.set(h, fn);
-				obj.create("li").create("a", {"data-hash": item.hyphenate().toLowerCase(), "data-route": hash}).on("click", function (e) { if (!this.hasClass("disabled")) location.hash = "!" + this.data("route"); }).html(item);
+				anchor = obj.create("li").create("a", {"data-hash": item.hyphenate().toLowerCase(), "data-route": hash}).html(item)
+				anchor.on("click", function (e) { if (!this.hasClass("disabled")) location.hash = "!" + this.data("route"); }, "route", anchor, "all");
 				switch (true) {
-					case (/function|string/.test(typeof i)):
+					case regex.test(typeof i):
 					case i === null:
 						section.create("section", {"class": "tab hidden", "data-hash": h});
 						break;
@@ -146,9 +150,6 @@
 			return target;
 		};
 
-		// Setting "active" tab class based on hash parsing
-		$.on("hash", function (hash) { active(hash); }, "tabs");
-
 		// Hooking into prototype chain
 		$.property(Element.prototype, "tabs", {value: function (children, args, route, first) { return create(this, children, args, route, first); }});
 		if ($.client.ie && $.client.version === 8) $.property(HTMLDocument.prototype, "tabs", {value: function (children, args, route, first) { return create(this, children, args, route, first); }});
@@ -158,12 +159,13 @@
 			active : active,
 			create : create
 		};
-	}),
+	});
+
 	fn = function (abaaso) {
 		abaaso.module("tabs", tabs(global[abaaso.aliased]));
+		abaaso.on("hash", function (hash) { this.active(hash); }, "tabs", abaaso.tabs, "all");
 		return abaaso.tabs;
 	};
 
-	// AMD support
 	typeof define === "function" ? define(["abaaso", "abaaso.route"], function (abaaso) { return fn(global[abaaso.aliased]); }) : abaaso.on("init", function () { fn(global[abaaso.aliased]); }, "abaaso.tabs");
 })(this);
