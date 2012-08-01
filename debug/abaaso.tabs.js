@@ -32,9 +32,8 @@
  *
  * @author Jason Mulligan <jason.mulligan@avoidwork.com>
  * @link http://avoidwork.com
- * @requires abaaso 2.2.5
- * @requires abaaso.route 1.3.4
- * @version 1.4.0
+ * @requires abaaso 2.7.0
+ * @version 1.4.1
  */
 (function (global) {
 	"use strict";
@@ -167,5 +166,5 @@
 		return abaaso.tabs;
 	};
 
-	typeof define === "function" ? define(["abaaso", "abaaso.route"], function (abaaso) { return fn(global[abaaso.aliased]); }) : abaaso.on("init", function () { fn(global[abaaso.aliased]); }, "abaaso.tabs");
+	typeof define === "function" ? define(["abaaso"], function (abaaso) { return fn(global[abaaso.aliased]); }) : abaaso.on("init", function () { fn(global[abaaso.aliased]); }, "abaaso.tabs");
 })(this);
