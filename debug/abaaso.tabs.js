@@ -33,7 +33,7 @@
  * @author Jason Mulligan <jason.mulligan@avoidwork.com>
  * @link http://avoidwork.com
  * @requires abaaso 2.7.0
- * @version 1.4.1
+ * @version 1.4.2
  */
 (function (global) {
 	"use strict";
@@ -151,7 +151,7 @@
 
 		// Hooking into prototype chain
 		$.property(Element.prototype, "tabs", {value: function (children, args, route, first) { return create(this, children, args, route, first); }});
-		if ($.client.ie && $.client.version === 8) $.property(HTMLDocument.prototype, "tabs", {value: function (children, args, route, first) { return create(this, children, args, route, first); }});
+		if (typeof HTMLDocument !== "undefined") $.property(HTMLDocument.prototype, "tabs", {value: function (children, args, route, first) { return create(this, children, args, route, first); }});
 
 		// @constructor
 		return {
