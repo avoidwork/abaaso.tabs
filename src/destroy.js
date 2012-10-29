@@ -21,6 +21,9 @@ var destroy = function (obj, arg) {
 
 		li.destroy();
 		section.destroy();
+
+		// Loading initial route if the current one was just destroyed
+		if ($.route.hash() === i) $.route.hash($.route.initial);
 	});
 
 	return obj;
