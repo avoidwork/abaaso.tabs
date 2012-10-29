@@ -15,7 +15,9 @@ var destroy = function (obj, arg) {
 		var root = false,
 		    li, section;
 
-		i       = i.toLowerCase();
+		i = i.toLowerCase().replace(/^\/{1,1}/, "");
+		i = "/" + i;
+
 		li      = obj.find("a[data-route=\"" + i + "\"]")[0].parentNode;
 		section = li.parentNode.find("section[data-hash=\"" + i + "\"]")[0];
 
