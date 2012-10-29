@@ -4,6 +4,8 @@
  * @return {Undefined} undefined
  */
 var init = function (abaaso) {
+	var instance = {};
+
 	$ = global[abaaso.aliased];
 
 	// hashbang hook
@@ -31,9 +33,10 @@ var init = function (abaaso) {
 		}
 	});
 
-	// Interface
-	return {
+	instance = {
 		active : active,
 		create : create
 	};
+
+	return abaaso.module("tabs", instance);
 };
