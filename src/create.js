@@ -15,8 +15,8 @@ var create = function (target, children, args, route, first) {
 
 	route   = typeof route === "undefined" ? "" : route;
 	array   = (children instanceof Array);
-	obj     = target.create("ul", args);
-	section = target.create("section", {"class": "tab"});
+	obj     = target.find(" > ul.tab").length > 0 ? target.find(" > ul.tab")[0] : target.create("ul", args);
+	section = target.find(" > section.tab").length > 0 ? target.find(" > section.tab")[0] : target.create("section", {"class": "tab"});
 	first   = (typeof first === "undefined" || first === true);
 
 	switch (true) {
