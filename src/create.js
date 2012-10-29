@@ -19,6 +19,8 @@ var create = function (target, children, args, route, first) {
 	section = target.find(" > section.tab").length > 0 ? target.find(" > section.tab")[0] : target.create("section", {"class": "tab"});
 	first   = (typeof first === "undefined" || first === true);
 
+	if (target.hasClass("tab")) route = target.data("hash") + "/";
+
 	switch (true) {
 		case !route.isEmpty():
 			dhash = route.replace(/^\/{1,1}/, "");
@@ -46,8 +48,11 @@ var create = function (target, children, args, route, first) {
 
 		// Setting click listener, not tied to route to keep concerns seperate
 		anchor.on("click", function (e) {
-			if (!this.hasClass("disabled")) location.hash = "!" + this.data("route");
-		}, "route", anchor, "all");
+		       		if (!this.hasClass("disabled")) location.hash = "!" + this.data("route");
+		       }, "route", anchor, "all")
+		      .on("delete", function (arg) {
+		       		$.route.del(h);
+		      });
 
 		// Creating tab or collection
 		switch (true) {

@@ -20,6 +20,7 @@ module.exports = function (grunt) {
           "src/intro.js",
           "src/active.js",
           "src/create.js",
+          "src/destroy.js",
           "src/init.js",
           "src/outro.js"
         ],
