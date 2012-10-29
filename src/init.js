@@ -10,8 +10,8 @@ var init = function (abaaso) {
 
 	// hashbang hook
 	abaaso.on("hash", function (hash) {
-		this.active(hash);
-	}, "tabs", abaaso.tabs, "all");
+		active(hash);
+	}, "tabs", abaaso, "all");
 
 	// Hooking into the prototype
 	$.property(Element.prototype, "tab", {
