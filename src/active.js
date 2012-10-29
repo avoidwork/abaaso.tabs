@@ -31,7 +31,7 @@ var active = function (arg) {
 		
 		x  = "a[data-hash=\"" + i + "\"]";
 		//x  = (prev !== "" ? "ul.active[data-hash=\"" + prev + "\"] " : ".root ") + x;
-		xb = (prev !== "" ? ".active[data-hash=\"" + prev + "\"] " : ".root ") + x;
+		xb = (prev !== "" ? ".tab[data-hash=\"" + prev + "\"] " : ".root ") + x;
 
 		// Setting classes
 		//tabs.concat($(a).addClass("active"));
