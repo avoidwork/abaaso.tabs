@@ -19,7 +19,7 @@ var create = function (target, children, args, route, first) {
 	section = target.find(" > section.tab").length > 0 ? target.find(" > section.tab")[0] : target.create("section", {"class": "tab"});
 	first   = (typeof first === "undefined" || first === true);
 
-	if (target.hasClass("tab")) route = target.data("hash") + "/";
+	if (target.hasClass("tab")) route = target.data("hash");
 
 	switch (true) {
 		case !route.isEmpty():
