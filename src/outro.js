@@ -1,12 +1,4 @@
 // AMD or classic
-if (typeof define === "function") {
-	define(["abaaso"], function (abaaso) {
-		$ = global[abaaso.aliased];
-		return init();
-	});
-}
-else abaaso.on("init", function () {
-	$ = global[abaaso.aliased];
-	init();
-}, "abaaso.tabs");
+typeof define === "function" ? define(["abaaso"], function (abaaso) { return init(abaaso); })
+                             : abaaso.on("init", function () { init(abaaso); }, "abaaso.tabs");
 })(this);
