@@ -30,4 +30,10 @@ var init = function (abaaso) {
 			return create(this, children, args, route, first);
 		}
 	});
+
+	// Interface
+	return {
+		active : active,
+		create : create
+	};
 };
