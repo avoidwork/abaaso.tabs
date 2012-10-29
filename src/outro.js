@@ -1,8 +1,12 @@
-
+// AMD or classic
 if (typeof define === "function") {
-	define(["abaaso"], function (abaaso) { return fn(global[abaaso.aliased]); });
+	define(["abaaso"], function (abaaso) {
+		$ = global[abaaso.aliased];
+		return init();
+	});
 }
-else abaaso.on("init", function () { fn(global[abaaso.aliased]); }, "abaaso.tabs");
-
-
+else abaaso.on("init", function () {
+	$ = global[abaaso.aliased];
+	init();
+}, "abaaso.tabs");
 })(this);

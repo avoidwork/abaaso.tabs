@@ -37,11 +37,19 @@ var create = function (target, children, args, route, first) {
 		item = array ? i : k;
 		hash = route + "/" + item.hyphenate().toLowerCase();
 		h    = hash.replace(/^\//, "");
-		fn   = typeof i === "function" ? i : function () { void(0); };
+		fn   = typeof i === "function" ? i : function () { void 0; };
 
 		$.route.set(h, fn);
-		anchor = obj.create("li").create("a", {"data-hash": item.hyphenate().toLowerCase(), "data-route": hash}).html(item)
-		anchor.on("click", function (e) { if (!this.hasClass("disabled")) location.hash = "!" + this.data("route"); }, "route", anchor, "all");
+
+		// Creating anchor
+		anchor = obj.create("li").create("a", {"data-hash": item.hyphenate().toLowerCase(), "data-route": hash}).html(item);
+
+		// Setting click listener, not tied to route to keep concerns seperate
+		anchor.on("click", function (e) {
+			if (!this.hasClass("disabled")) location.hash = "!" + this.data("route");
+		}, "route", anchor, "all");
+
+		// Creating tab or collection
 		switch (true) {
 			case regex.test(typeof i):
 			case i === null:

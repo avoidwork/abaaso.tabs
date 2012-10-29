@@ -20,7 +20,6 @@ module.exports = function (grunt) {
           "src/intro.js",
           "src/active.js",
           "src/create.js",
-          "src/tabs.js",
           "src/outro.js"
         ],
         dest : "lib/abaaso.tabs.js"
