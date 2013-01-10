@@ -6,12 +6,12 @@
  * @return {Object}     Element which contained the tab(s)
  */
 var destroy = function (obj, arg) {
-	if (!(obj instanceof Element) || typeof arg === "undefined") throw Error($.label.error.invalidArguments);
+	if (!(obj instanceof Element) || arg === undefined) throw Error($.label.error.invalidArguments);
 
 	if (!(arg instanceof Array)) arg = String(arg).explode();
 
 	// Removing tab(s) if found
-	arg.each(function (i) {
+	arg.forEach(function (i) {
 		var root = false,
 		    li, section;
 

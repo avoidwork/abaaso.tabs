@@ -4,20 +4,19 @@
  * @param  {Object} target   Element to receive the tabs
  * @param  {Object} children Tabs to add to this widget
  * @param  {Object} args     Properties to set on the tabs
- * @param  {String} route    URI route to prepend
- * @return {Object} Element
+ * @param  {String} route    [Optional] URI route to prepend
+ * @return {Object}          Element
  */
-var create = function (target, children, args, route, first) {
+var create = function (target, children, args, route) {
 	var regex = /function|string/,
 	    obj, hash, x, item, array, section, fn, dhash;
 
 	args instanceof Object ? args["class"] = "tab" : args = {"class": "tab"};
 
-	route   = typeof route === "undefined" ? "" : route;
+	route   = route || "";
 	array   = (children instanceof Array);
 	obj     = target.find(" > ul.tab").length > 0 ? target.find(" > ul.tab")[0] : target.create("ul", args);
 	section = target.find(" > section.tab").length > 0 ? target.find(" > section.tab")[0] : target.create("section", {"class": "tab"});
-	first   = (typeof first === "undefined" || first === true);
 
 	if (target.hasClass("tab")) route = "/" + target.data("hash");
 
@@ -44,7 +43,7 @@ var create = function (target, children, args, route, first) {
 		$.route.set(h, fn);
 
 		// Creating anchor
-		anchor = obj.create("li").create("a", {"data-hash": item.hyphenate().toLowerCase(), "data-route": hash}).html(item);
+		anchor = obj.create("li").create("a", {"data-hash": item.hyphenate().toLowerCase(), "data-route": hash, title: item}).html(item);
 
 		// Setting click listener, not tied to route to keep concerns seperate
 		anchor.on("click", function (e) {
@@ -61,9 +60,9 @@ var create = function (target, children, args, route, first) {
 				section.create("section", {"class": "tab hidden", "data-hash": h});
 				break;
 			case typeof i === "object":
-				section.tabs(i, null, hash, first);
+				section.tabs(i, null, hash);
 				w = $("section[data-hash=\"" + h + "\"]");
-				if (typeof w !== "undefined") i.each(function (e, f) {
+				i.forEach(function (e, f) {
 					var x = typeof e === "object" ? f : e;
 					w.create("section", {"class": "tab hidden", "data-hash": x.toLowerCase()});
 				});
@@ -71,6 +70,6 @@ var create = function (target, children, args, route, first) {
 		}
 	};
 
-	children instanceof Array ? children.each(fn) : $.iterate(children, fn);
+	children instanceof Array ? children.forEach(fn) : $.iterate(children, fn);
 	return target;
 };
