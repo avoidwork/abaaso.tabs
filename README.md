@@ -34,7 +34,7 @@ Identifies UL & Section Elements that hold tab related Elements.
 
 ## Information
 #### License
-abaaso.route is licensed under BSD-3 http://www.opensource.org/licenses/BSD-3-Clause
+abaaso.route is licensed under BSD-3 https://raw.github.com/avoidwork/abaaso.tabs/master/LICENSE
 
 #### Copyright
 Copyright (c) 2012, Jason Mulligan <jason.mulligan@avoidwork.com>
