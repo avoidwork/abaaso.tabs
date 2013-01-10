@@ -1,7 +1,7 @@
 {
   "name": "abaaso.tabs",
   "description": "abaaso tabbed gui module",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "homepage": "https://github.com/avoidwork/abaaso.tabs",
   "author": {
     "name": "Jason Mulligan",
@@ -17,7 +17,7 @@
   "licenses": [
     {
       "type": "BSD-3",
-      "url": "http://opensource.org/licenses/BSD-3-Clause"
+      "url": "https://raw.github.com/avoidwork/abaaso.tabs/master/LICENSE"
     }
   ],
   "main": "lib/abaaso.tabs",

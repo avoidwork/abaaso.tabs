@@ -13,8 +13,8 @@ var init = function (abaaso) {
 	$ = global[abaaso.aliased];
 
 	// create() facade
-	fnAdd = function (children, args, route, first) {
-		return create(this, children, args, route, first);
+	fnAdd = function (children, args, route) {
+		return create(this, children, args, route);
 	};
 
 	// destroy() facade
@@ -27,13 +27,14 @@ var init = function (abaaso) {
 		active(hash);
 	}, "tabs", abaaso, "all");
 
-	// `create` hook
-	$.property(Element.prototype, add, {value: fnAdd});
-	if (typeof HTMLDocument !== "undefined") $.property(HTMLDocument.prototype, add, {value: fnAdd});
-
-	// `destroy` hook
+	// Prototype hooks
+	$.property(Element.prototype, add,    {value: fnAdd});
 	$.property(Element.prototype, remove, {value: fnRemove});
-	if (typeof HTMLDocument !== "undefined") $.property(HTMLDocument.prototype, remove, {value: fnRemove});
+
+	if (typeof HTMLDocument !== "undefined") {
+		$.property(HTMLDocument.prototype, add,    {value: fnAdd});
+		$.property(HTMLDocument.prototype, remove, {value: fnRemove});
+	}
 
 	instance = {
 		active  : active,

@@ -2,7 +2,7 @@
  * Sets "active" class on tabs based on hash parsing
  * 
  * @param  {String} arg Hash delimited by "/"
- * @return {Array} Tabs that received "active"
+ * @return {Array}      Tabs that received "active"
  */
 var active = function (arg) {
 	var hash = arg.explode("/"),
@@ -15,10 +15,10 @@ var active = function (arg) {
 	$(".tab").addClass("hidden");
 	$(".root").removeClass("hidden");
 
-	if (hash.first() === "#!") hash.shift();
+	if (hash[0] === "#!") hash.shift();
 
 	// Setting the route path active & visible
-	hash.each(function (i) {
+	hash.forEach(function (i) {
 		x  = "a[data-hash=\"" + i + "\"]";
 		xb = ".tab[data-hash=\"" + i + "\"]";
 
