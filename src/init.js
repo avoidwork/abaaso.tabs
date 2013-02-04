@@ -23,7 +23,7 @@ var init = function (abaaso) {
 	};
 
 	// hashbang hook
-	abaaso.on("hash", function (hash) {
+	$.on("hash", function (hash) {
 		active(hash);
 	}, "tabs", abaaso, "all");
 

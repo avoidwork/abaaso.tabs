@@ -11,7 +11,7 @@ var active = function (arg) {
 	    x, xb;
 
 	// Hiding tab Elements
-	$(".tab .active").removeClass("active");
+	$("ul.tab > li > a.active, section.tab > section.active").removeClass("active");
 	$(".tab").addClass("hidden");
 	$(".root").removeClass("hidden");
 
