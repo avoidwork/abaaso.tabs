@@ -1,7 +1,7 @@
 {
   "name": "abaaso.tabs",
-  "description": "abaaso tabbed gui module",
-  "version": "1.4.4",
+  "description": "abaaso tabbed GUI module",
+  "version": "1.4.5",
   "homepage": "https://github.com/avoidwork/abaaso.tabs",
   "author": {
     "name": "Jason Mulligan",
