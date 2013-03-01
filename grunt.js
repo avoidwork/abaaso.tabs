@@ -33,9 +33,6 @@ module.exports = function (grunt) {
     min : {
       "lib/abaaso.tabs.min.js" : ["<banner>", "lib/abaaso.tabs.js"]
     },
-    test : {
-      files : ["test/**/*.js"]
-    },
     watch : {
       files : "<config:lint.files>",
       tasks : "default"
@@ -60,7 +57,7 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask("default", "concat version min test");
+  grunt.registerTask("default", "concat version min");
 
   grunt.registerTask("version", function () {
     var ver = grunt.config("pkg").version,
