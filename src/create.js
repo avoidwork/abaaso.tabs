@@ -1,5 +1,5 @@
 /**
- * Add a tab widget to a target Element
+ * Add a tab to an Element
  * 
  * @param  {Object} target   Element to receive the tabs
  * @param  {Object} children Tabs to add to this widget

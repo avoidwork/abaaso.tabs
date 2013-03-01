@@ -1,5 +1,5 @@
 /**
- * Removes one or many tabs from an Element
+ * Removes last tab from an Element (e.g. hit Back button)
  * 
  * @param  {Object} obj Element containing the tab(s)
  * @param  {Mixed}  arg Array of routes or route to destroy, e.g. "/blog"
@@ -16,10 +16,10 @@ var destroy = function (obj, arg) {
 		    li, section;
 
 		i  = i.toLowerCase().replace(/^\/{1,1}/, "");
-		li = obj.find("a[data-route=\"/" + i + "\"]")[0].parentNode;
+		li = obj.find("a[data-route=\"/" + i + "\"]").last().parentNode;
 
 		if (typeof li !== "undefined") {
-			section = li.parentNode.parentNode.find("section[data-hash=\"" + i + "\"]")[0];
+			section = li.parentNode.parentNode.find("section[data-hash=\"" + i + "\"]").last();
 			section.destroy();
 			li.destroy();
 
