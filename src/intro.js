@@ -1,4 +1,5 @@
-(function (global) {
+( function ( global ) {
 "use strict";
 
-var $;
+var $,
+    REGEX_FUNCSTR = /function|string/;
