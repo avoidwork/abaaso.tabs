@@ -1,4 +1,10 @@
 // AMD or classic
-typeof define === "function" ? define(["abaaso"], function (abaaso) { return init(abaaso); })
-                             : abaaso.on("init", function () { init(abaaso); }, "abaaso.tabs");
-})(this);
+if ( typeof define === "function" ) {
+	define( ["abaaso"], function ( abaaso ) {
+		return init( abaaso );
+	});
+}
+else {
+	!abaaso.ready ? abaaso.on( "init", function () { init( abaaso ); }, "abaaso.tabs" ) : init ( abaaso );
+}
+})( this );
