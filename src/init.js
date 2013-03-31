@@ -3,14 +3,11 @@
  * 
  * @return {Undefined} undefined
  */
-var init = function ( abaaso ) {
+var init = function () {
 	var module = {},
 	    add    = "tabs",
 	    remove = "unTabs",
 	    fnAdd, fnRemove;
-
-	// Setting reference
-	$ = global[abaaso.aliased];
 
 	// create() facade
 	fnAdd = function ( children, args, route ) {
@@ -42,5 +39,5 @@ var init = function ( abaaso ) {
 		destroy : destroy
 	};
 
-	return abaaso.module( "tabs", module );
+	return $.module( "tabs", module );
 };
