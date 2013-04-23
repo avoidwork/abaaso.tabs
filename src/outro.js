@@ -6,6 +6,7 @@ if ( typeof define === "function" ) {
 	});
 }
 else {
+	$ = abaaso;
 	$.ready ? init() : $.on( "init", function () { init(); }, "abaaso.tabs" );
 }
-})( abaaso );
+})();
