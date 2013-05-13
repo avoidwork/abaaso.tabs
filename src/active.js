@@ -5,7 +5,7 @@
  * @return {Array}      Tabs that received "active"
  */
 var active = function ( arg ) {
-	var hash = arg.explode("/"),
+	var hash = arg.replace(/\#\!?/, "").explode("/"),
 	    tabs = [],
 	    prev = "",
 	    x, xb;
