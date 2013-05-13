@@ -5,7 +5,7 @@
  * @return {Array}      Tabs that received "active"
  */
 var active = function ( arg ) {
-	var hash = arg.explode("/"),
+	var hash = arg.replace(/\#\!?/, "").explode("/"),
 	    tabs = [],
 	    prev = "",
 	    x, xb;
@@ -15,7 +15,9 @@ var active = function ( arg ) {
 	$( ".tab" ).addClass( "hidden" );
 	$( ".root" ).removeClass( "hidden" );
 
-	if ( hash[0] === "#!" ) hash.shift();
+	if ( hash[0].isEmpty() ) {
+		hash.shift();
+	}
 
 	// Setting the route path active & visible
 	hash.forEach(function (i) {
@@ -33,7 +35,7 @@ var active = function ( arg ) {
 	});
 
 	// Displaying first nested tab
-	$( x + " section.active > section.tab:first-child" ).addClass( "active" );
+	$( x  + " section.active > section.tab:first-child" ).addClass( "active" );
 	$( xb + " section.active > section.tab:first-child" ).addClass( "active" ).removeClass( "hidden" );
 
 	// Displaying the active route (if nested)
