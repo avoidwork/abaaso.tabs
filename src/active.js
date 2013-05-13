@@ -15,7 +15,7 @@ var active = function ( arg ) {
 	$( ".tab" ).addClass( "hidden" );
 	$( ".root" ).removeClass( "hidden" );
 
-	if ( hash[0] === "#!" ) hash.shift();
+	if ( hash[0].isEmpty() ) hash.shift();
 
 	// Setting the route path active & visible
 	hash.forEach(function (i) {
